@@ -41,6 +41,9 @@ function switchMode(m) {
   mode = m;
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
   showSection('section-' + m);
+  if (m == 'coin'){
+    document.getElementById('coin').classList.remove('flip-anim');
+  }
 }
 
 function switchPicker(pm) {
@@ -77,6 +80,8 @@ document.getElementById('flipBtn').addEventListener('click', () => {
   coin.classList.remove('flip-anim');
   void coin.offsetWidth; // force reflow to restart animation
   coin.classList.add('flip-anim');
+
+  coin.textContent = "?"
 
   setTimeout(() => {
     coin.textContent = side === 'heads' ? 'H' : 'T';

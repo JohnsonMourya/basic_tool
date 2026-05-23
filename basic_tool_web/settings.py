@@ -1,15 +1,16 @@
 import os
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
+DEBUG = config('DJANGO_DEBUG').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split(',')
 
-CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', '').split(',') if os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS') else []
+CSRF_TRUSTED_ORIGINS = config('DJANGO_CSRF_TRUSTED_ORIGINS').split(',') if config('DJANGO_CSRF_TRUSTED_ORIGINS') else []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -90,7 +91,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GA_MEASUREMENT_ID = os.environ.get('GA_MEASUREMENT_ID', '')
+GA_MEASUREMENT_ID = config('GA_MEASUREMENT_ID')
 
 if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
