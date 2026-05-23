@@ -1,0 +1,46 @@
+{% extends "homeapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-xl-5">
+
+      <h1 class="h4 mb-3">QR Code Generator</h1>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <label class="form-label small" for="qrInput">Text or URL</label>
+          <textarea class="form-control mb-3" id="qrInput" rows="3" placeholder="https://example.com">https://example.com</textarea>
+
+          <div class="d-flex gap-2 mb-3">
+            <select class="form-select form-select-sm" id="qrSize" style="width:auto;">
+              <option value="128">128×128</option>
+              <option value="192">192×192</option>
+              <option value="256" selected>256×256</option>
+              <option value="384">384×384</option>
+              <option value="512">512×512</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="generateBtn">Generate</button>
+          </div>
+
+          <div id="qrError" class="small text-danger mb-2"></div>
+
+          <div class="d-flex flex-column align-items-center py-3">
+            <div id="qrCode" class="d-inline-block"></div>
+            <button class="btn btn-outline-secondary btn-sm mt-3 d-none" id="downloadBtn">Download PNG</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'qrcode/js/qrcode.min.js' %}"></script>
+<script src="{% static 'qrcode/js/app.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "homeapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <h1 class="h3 mb-0">Unit Converter</h1>
+  </div>
+
+  <ul class="nav nav-pills mb-4 gap-1 flex-nowrap overflow-auto pb-1" style="scrollbar-width: thin;">
+    <li class="nav-item"><button class="nav-link category-btn active" data-category="length">Length</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="weight">Weight</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="temperature">Temperature</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="volume">Volume</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="area">Area</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="speed">Speed</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="time">Time</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="data_storage">Data Storage</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="energy">Energy</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="power">Power</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="pressure">Pressure</button></li>
+    <li class="nav-item"><button class="nav-link category-btn" data-category="fuel">Fuel &amp; Mileage</button></li>
+  </ul>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      <div class="row g-4 align-items-start">
+        <div class="col-md-5">
+          <label class="form-label fw-medium text-secondary-emphasis small">From</label>
+          <div class="input-group mb-2">
+            <input type="text" class="form-control form-control-lg" id="fromValue" inputmode="decimal" autocomplete="off" placeholder="0">
+            <button class="btn btn-outline-secondary copy-btn" data-target="from" title="Copy">Copy</button>
+          </div>
+          <select class="form-select" id="fromUnit"></select>
+        </div>
+
+        <div class="col-md-2 text-center">
+          <button class="btn btn-outline-secondary rounded-circle p-3 mt-4" id="swapBtn" title="Swap units">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="col-md-5">
+          <label class="form-label fw-medium text-secondary-emphasis small">To</label>
+          <div class="input-group mb-2">
+            <input type="text" class="form-control form-control-lg" id="toValue" inputmode="decimal" autocomplete="off" placeholder="0">
+            <button class="btn btn-outline-secondary copy-btn" data-target="to" title="Copy">Copy</button>
+          </div>
+          <select class="form-select" id="toUnit"></select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'unitconvertor/js/converter.js' %}"></script>
+{% endblock %}

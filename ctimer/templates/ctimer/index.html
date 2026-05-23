@@ -1,0 +1,96 @@
+{% extends "homeapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-xl-5">
+
+      <h1 class="h4 mb-3">Timer</h1>
+
+      <div class="btn-group mb-4 w-100" role="group">
+        <button class="btn btn-outline-secondary tm-mode-btn active" data-tm-mode="timer">Timer</button>
+        <button class="btn btn-outline-secondary tm-mode-btn" data-tm-mode="pomo">Pomodoro</button>
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4 text-center">
+
+          <div class="display-2 fw-light font-monospace mb-4 lh-1" id="timerDisplay">00:00</div>
+
+          <div id="timerSection">
+            <div class="row g-2 mb-3 mx-auto" style="max-width:280px;">
+              <div class="col-4">
+                <label class="form-label small">Hrs</label>
+                <input type="number" class="form-control form-control-sm text-center timer-input" id="hrs" value="0" min="0">
+              </div>
+              <div class="col-4">
+                <label class="form-label small">Min</label>
+                <input type="number" class="form-control form-control-sm text-center timer-input" id="mins" value="0" min="0">
+              </div>
+              <div class="col-4">
+                <label class="form-label small">Sec</label>
+                <input type="number" class="form-control form-control-sm text-center timer-input" id="secs" value="0" min="0">
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-success" id="startBtn">Start</button>
+              <button class="btn btn-warning" id="pauseBtn">Pause</button>
+              <button class="btn btn-outline-secondary" id="resetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div id="pomoSection" class="d-none">
+            <div id="pomoPhaseLabel" class="badge bg-danger mb-1">Work</div>
+            <div id="pomoStatus" class="fw-bold text-danger mb-3">Focus</div>
+            <div class="small text-secondary-emphasis mb-3">Pomodoros: <span id="pomoCount">0 / 4</span></div>
+
+            <div class="row g-2 mb-3 mx-auto" style="max-width:300px;">
+              <div class="col-4">
+                <label class="form-label small">Work</label>
+                <input type="number" class="form-control form-control-sm text-center pomo-input" id="pomoWork" value="25" min="1">
+              </div>
+              <div class="col-4">
+                <label class="form-label small">Short</label>
+                <input type="number" class="form-control form-control-sm text-center pomo-input" id="pomoShort" value="5" min="1">
+              </div>
+              <div class="col-4">
+                <label class="form-label small">Long</label>
+                <input type="number" class="form-control form-control-sm text-center pomo-input" id="pomoLong" value="15" min="1">
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-success" id="pomoStartBtn">Start</button>
+              <button class="btn btn-warning" id="pomoPauseBtn">Pause</button>
+              <button class="btn btn-outline-secondary" id="pomoResetBtn">Reset</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal fade" id="doneModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content text-center p-3">
+            <div class="modal-body py-4">
+              <div class="fs-1 mb-2" id="doneIcon">⏰</div>
+              <div class="fs-5 fw-bold mb-1" id="doneTitle">Time's up!</div>
+              <div class="small text-secondary-emphasis" id="doneMsg"></div>
+            </div>
+            <div class="d-flex justify-content-center pb-3">
+              <button class="btn btn-primary btn-sm" data-bs-dismiss="modal" id="doneOkBtn">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'ctimer/js/timer.js' %}"></script>
+{% endblock %}

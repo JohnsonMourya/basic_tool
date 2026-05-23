@@ -20,4 +20,11 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('homeapp.urls')),
     path('admin/', admin.site.urls),
+    path('calculator/', include('calculator.urls')),
+    path('calender/', include('calender.urls')),
+    path('qrcode/', include('qrcode.urls')),
+    path('randomizer/', include('randomizer.urls')),
+    path('stopwatch/', include('stopwatch.urls')),
+    path('convert/', include('unitconvertor.urls')),
+    path('timer/', include('ctimer.urls')),
 ]

@@ -1,0 +1,181 @@
+{% extends "homeapp/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-xl-6">
+
+      <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
+        <h1 class="h4 mb-0 me-auto">Calculator</h1>
+        <div class="btn-group btn-group-sm" role="group">
+          <button class="btn btn-outline-secondary mode-btn active" data-mode="base">Base</button>
+          <button class="btn btn-outline-secondary mode-btn" data-mode="scientific">Scientific</button>
+          <button class="btn btn-outline-secondary mode-btn" data-mode="binary">Binary</button>
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-3">
+
+          <div id="opSection" class="mb-2">
+            <button class="btn btn-sm btn-outline-secondary" id="orderBtn">BODMAS</button>
+          </div>
+
+          <input type="text" class="form-control form-control-lg font-monospace mb-1" id="calcExpr"
+                 inputmode="text" autocomplete="off" placeholder="0" spellcheck="false">
+
+          <div class="mb-3" style="min-height: 1.5rem;">
+            <span id="calcResult" class="calc-result"></span>
+          </div>
+
+          <div id="baseControls">
+            <div class="calc-grid">
+              <button class="btn btn-outline-secondary calc-btn" data-value="(">(</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value=")">)</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="C">C</button>
+              <button class="btn btn-outline-danger calc-btn" data-value="AC">AC</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="7">7</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="8">8</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="9">9</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="÷">÷</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="4">4</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="5">5</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="6">6</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="×">×</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="1">1</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="2">2</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="3">3</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="−">−</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="0">0</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="00">00</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value=".">.</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="+">+</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="C" style="grid-column: span 2;">⌫</button>
+              <button class="btn btn-primary calc-btn" data-value="=" style="grid-column: span 2;">=</button>
+            </div>
+          </div>
+
+          <div id="sciControls" style="display:none;">
+            <div class="calc-grid mb-2">
+              <button class="btn btn-outline-info calc-btn" data-value="sin(">sin</button>
+              <button class="btn btn-outline-info calc-btn" data-value="cos(">cos</button>
+              <button class="btn btn-outline-info calc-btn" data-value="tan(">tan</button>
+              <button class="btn btn-outline-info calc-btn" data-value="log(">log</button>
+              <button class="btn btn-outline-info calc-btn" data-value="ln(">ln</button>
+
+              <button class="btn btn-outline-info calc-btn" data-value="sqrt(">√</button>
+              <button class="btn btn-outline-info calc-btn" data-value="^2">x²</button>
+              <button class="btn btn-outline-info calc-btn" data-value="^3">x³</button>
+              <button class="btn btn-outline-info calc-btn" data-value="^">xʸ</button>
+              <button class="btn btn-outline-info calc-btn" data-value="π">π</button>
+
+              <button class="btn btn-outline-info calc-btn" data-value="e">e</button>
+              <button class="btn btn-outline-info calc-btn" data-value="!">!</button>
+            </div>
+            <div class="calc-grid">
+              <button class="btn btn-outline-secondary calc-btn" data-value="(">(</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value=")">)</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="C">C</button>
+              <button class="btn btn-outline-danger calc-btn" data-value="AC">AC</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="7">7</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="8">8</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="9">9</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="÷">÷</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="4">4</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="5">5</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="6">6</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="×">×</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="1">1</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="2">2</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="3">3</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="−">−</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="0">0</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="00">00</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value=".">.</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="+">+</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="C" style="grid-column: span 2;">⌫</button>
+              <button class="btn btn-primary calc-btn" data-value="=" style="grid-column: span 2;">=</button>
+            </div>
+          </div>
+
+          <div id="binaryControls" style="display:none;">
+            <div class="calc-grid">
+              <button class="btn btn-outline-secondary calc-btn" data-value="C">C</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="CE">CE</button>
+              <button class="btn btn-outline-danger calc-btn" data-value="AC">AC</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="0">0</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="1">1</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="+">+</button>
+              <button class="btn btn-outline-warning calc-btn" data-value="−">−</button>
+
+              <button class="btn btn-outline-info calc-btn" data-value="AND">AND</button>
+              <button class="btn btn-outline-info calc-btn" data-value="OR">OR</button>
+              <button class="btn btn-outline-info calc-btn" data-value="XOR">XOR</button>
+              <button class="btn btn-outline-info calc-btn" data-value="NOT">NOT</button>
+
+              <button class="btn btn-outline-info calc-btn" data-value="<<">«</button>
+              <button class="btn btn-outline-info calc-btn" data-value=">>">»</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value="(">(</button>
+              <button class="btn btn-outline-secondary calc-btn" data-value=")">)</button>
+
+              <button class="btn btn-outline-secondary calc-btn" data-value="C" style="grid-column: span 2;">⌫</button>
+              <button class="btn btn-primary calc-btn" data-value="=" style="grid-column: span 2;">=</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm mt-3">
+        <div class="card-header bg-transparent d-flex justify-content-between align-items-center py-2">
+          <span class="small fw-medium">History</span>
+          <button class="btn btn-sm btn-outline-secondary" id="clearHistoryBtn">Clear</button>
+        </div>
+        <div id="calcHistory"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.calc-grid .btn {
+  padding: 0.6rem 0.3rem;
+  font-size: 1.1rem;
+  min-height: 48px;
+}
+.calc-result {
+  font-size: 1rem;
+  font-family: var(--bs-font-monospace, monospace);
+  word-break: break-all;
+}
+.history-item {
+  cursor: pointer;
+  border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+  transition: background-color 0.15s;
+}
+.history-item:last-child { border-bottom: none; }
+.history-item:hover { background-color: var(--bs-tertiary-bg, #f8f9fa); }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'calculator/js/calculator.js' %}"></script>
+{% endblock %}

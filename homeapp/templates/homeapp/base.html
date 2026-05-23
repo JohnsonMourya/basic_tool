@@ -1,41 +1,60 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if title %}
-    <title>{{ title}}</title>
+    <title>{{ title }}</title>
     {% else %}
     <title>Daily Tools</title>
     {% endif %}
     <link rel="stylesheet" href="{% static "homeapp/bootcss/bootstrap.min.css" %}">
+{% if GA_MEASUREMENT_ID %}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_MEASUREMENT_ID }}"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '{{ GA_MEASUREMENT_ID }}');
+</script>
+{% endif %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-md  bg-body-tertiary">
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
         <div class="container-fluid mt-2 mx-5">
-            <a class="navbar-brand" href="/">
-                <span class="navbar-brand mb-0 h1">Daily Tools</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls="navbarNav" aria-expands="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expands="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div id="navbarNav" class="collapse navbar-collapse">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Dasboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">About</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/calculator/">Calculator</a></li>
+                            <li><a class="dropdown-item" href="/calender/">Calendar</a></li>
+                            <li><a class="dropdown-item" href="/qrcode/">QR Code</a></li>
+                            <li><a class="dropdown-item" href="/randomizer/">Randomizer</a></li>
+                            <li><a class="dropdown-item" href="/stopwatch/">Stopwatch</a></li>
+                            <li><a class="dropdown-item" href="/timer/">Timer</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/convert/">Unit Converter</a></li>
+                        </ul>
                     </li>
                 </ul>
+                <div class="d-flex">
+                    <select class="form-select form-select-sm" id="themeSelect" aria-label="Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="system">System</option>
+                    </select>
+                </div>
             </div>
         </div>
     </nav>
@@ -43,4 +62,31 @@
     {% endblock %}
 </body>
 <script src="{% static "homeapp/bootjs/bootstrap.bundle.js" %}"></script>
+<script>
+(function() {
+    function setTheme(theme) {
+        if (theme === 'system') {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-bs-theme', prefersDark ? 'dark' : 'light');
+        } else {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+        }
+    }
+
+    const saved = localStorage.getItem('theme') || 'system';
+    document.getElementById('themeSelect').value = saved;
+    setTheme(saved);
+
+    document.getElementById('themeSelect').addEventListener('change', function() {
+        localStorage.setItem('theme', this.value);
+        setTheme(this.value);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+        const current = localStorage.getItem('theme') || 'system';
+        if (current === 'system') setTheme('system');
+    });
+})();
+</script>
+{% block extra_js %}{% endblock %}
 </html>
